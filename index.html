@@ -225,6 +225,57 @@ img { max-width: 100%; height: auto; }
 .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+/* LEGAL DOCUMENTS TABLE */
+.legal-docs { margin-top: 40px; }
+.legal-table { width: 100%; border-collapse: collapse; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.legal-table thead th { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: var(--white); padding: 15px 20px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+.legal-table tbody td { padding: 14px 20px; border-bottom: 1px solid #e5e7eb; color: var(--dark); font-size: 0.95rem; }
+.legal-table tbody tr:nth-child(even) { background: rgba(33, 150, 243, 0.04); }
+.legal-table tbody tr:hover { background: rgba(33, 150, 243, 0.08); }
+.legal-table tbody td:first-child { font-weight: 700; color: var(--primary); white-space: nowrap; }
+
+/* SCOPE OF WORK */
+.scope-of-work { background: var(--light); }
+.scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.scope-item { display: flex; align-items: center; gap: 18px; padding: 18px 25px; background: var(--white); border-radius: var(--radius); border-left: 4px solid var(--accent); transition: var(--transition); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.scope-item:hover { transform: translateX(8px); box-shadow: var(--shadow); border-left-color: var(--gold); }
+.scope-item .scope-number { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85rem; flex-shrink: 0; }
+.scope-item span { font-size: 1rem; color: var(--dark); font-weight: 500; }
+
+/* LOCATION WORKS */
+.locations { background: var(--white); }
+.location-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+.location-card { background: var(--light); border-radius: var(--radius); padding: 30px; text-align: center; transition: var(--transition); border: 1px solid #e5e7eb; }
+.location-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: transparent; }
+.location-card i { font-size: 2rem; color: var(--accent); margin-bottom: 15px; display: block; }
+.location-card h4 { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--primary); margin-bottom: 8px; font-weight: 700; }
+.location-card p { color: var(--gray); font-size: 0.9rem; }
+.location-note { margin-top: 30px; padding: 20px 25px; background: linear-gradient(135deg, rgba(26, 35, 126, 0.05), rgba(33, 150, 243, 0.05)); border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0; color: var(--gray); font-size: 0.95rem; line-height: 1.7; }
+
+/* SUPPLIER */
+.supplier { background: var(--light); }
+.supplier-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+.supplier-card { background: var(--white); border-radius: var(--radius); padding: 30px; transition: var(--transition); border: 1px solid #e5e7eb; }
+.supplier-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: transparent; }
+.supplier-card h4 { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; color: var(--primary); margin-bottom: 15px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+.supplier-card h4 i { color: var(--accent); }
+.supplier-card ul { list-style: none; padding: 0; }
+.supplier-card ul li { padding: 8px 0; color: var(--gray); font-size: 0.92rem; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; gap: 8px; }
+.supplier-card ul li:last-child { border-bottom: none; }
+.supplier-card ul li i { color: var(--accent); font-size: 0.7rem; }
+
+/* CLIENTS / EXPERIENCES */
+.clients { background: var(--white); }
+.clients-table { width: 100%; border-collapse: collapse; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.clients-table thead th { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: var(--white); padding: 15px 20px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+.clients-table tbody td { padding: 13px 20px; border-bottom: 1px solid #e5e7eb; color: var(--dark); font-size: 0.95rem; text-align: center; }
+.clients-table tbody tr:nth-child(even) { background: rgba(33, 150, 243, 0.04); }
+.clients-table tbody tr:hover { background: rgba(33, 150, 243, 0.08); transform: scale(1.01); }
+.clients-table tbody td:first-child { font-weight: 700; color: var(--primary); width: 60px; }
+.clients-table tbody td:nth-child(2) { text-align: left; font-weight: 600; }
+.clients-table tbody td:last-child { font-weight: 600; color: var(--accent); }
+.clients-note { margin-top: 20px; padding: 15px 25px; background: rgba(249, 168, 37, 0.08); border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0; color: var(--dark); font-weight: 600; }
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
     .hero .container { grid-template-columns: 1fr; text-align: center; }
@@ -236,6 +287,9 @@ img { max-width: 100%; height: auto; }
     .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
     .contact-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    .location-grid { grid-template-columns: repeat(2, 1fr); }
+    .supplier-grid { grid-template-columns: 1fr; }
+    .scope-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
     .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--primary-dark); flex-direction: column; padding: 20px; gap: 15px; }
@@ -249,6 +303,9 @@ img { max-width: 100%; height: auto; }
     .footer-grid { grid-template-columns: 1fr; }
     .cta-section h2 { font-size: 1.8rem; }
     .equipment-table { display: block; overflow-x: auto; }
+    .location-grid { grid-template-columns: 1fr; }
+    .legal-table { display: block; overflow-x: auto; }
+    .clients-table { display: block; overflow-x: auto; }
 }
 @media (max-width: 480px) {
     .hero h1 { font-size: 1.8rem; }
@@ -274,8 +331,9 @@ img { max-width: 100%; height: auto; }
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#organization">Structure</a></li>
-                <li><a href="#equipment">Equipment</a></li>
+                <li><a href="#scope">Scope</a></li>
+                <li><a href="#locations">Locations</a></li>
+                <li><a href="#clients">Clients</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact" class="nav-cta">Contact Us</a></li>
             </ul>
@@ -413,6 +471,52 @@ img { max-width: 100%; height: auto; }
                     <span class="count" data-target="30">0</span>
                     <div class="count-label">Satisfied Clients</div>
                 </div>
+            </div>
+
+            <!-- Legal Documents Table -->
+            <div class="legal-docs fade-in">
+                <div class="section-header" style="margin-bottom: 30px;">
+                    <span class="section-badge">Legal Documents</span>
+                    <h2 style="font-size: 1.8rem;">Company Background</h2>
+                </div>
+                <table class="legal-table">
+                    <thead>
+                        <tr>
+                            <th>Document Name</th>
+                            <th>Number &amp; Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fas fa-certificate" style="color: var(--gold); margin-right: 8px;"></i>Deed of Establishment</td>
+                            <td>Number 13 &mdash; September 18, 2013</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-file-alt" style="color: var(--accent); margin-right: 8px;"></i>Amendment Deed</td>
+                            <td>Number 33 &mdash; October 13, 2025</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-id-card" style="color: var(--accent); margin-right: 8px;"></i>NIB</td>
+                            <td>Number 2507230197557 &mdash; July 25, 2023<br><small style="color: var(--gray);">KBLI Code: 43212, 42206, 61100</small></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-file-contract" style="color: var(--accent); margin-right: 8px;"></i>SIUP</td>
+                            <td>Number 11/AC1.7/31/73/07/-1.824.27/e/2019 &mdash; April 04, 2019</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-landmark" style="color: var(--accent); margin-right: 8px;"></i>Legal Entity Approval</td>
+                            <td>Number AHU-5177.AH.01.01 &mdash; October 04, 2013</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-receipt" style="color: var(--accent); margin-right: 8px;"></i>NPWP</td>
+                            <td>Number 03.325.077.0-416.000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-award" style="color: var(--gold); margin-right: 8px;"></i>SBU</td>
+                            <td>PB-UMKU : 25072301975570003​0002</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
@@ -621,10 +725,200 @@ img { max-width: 100%; height: auto; }
         </div>
     </section>
 
-    <!-- ===================== PORTFOLIO ===================== -->
-    <section class="section portfolio" id="portfolio">
+    <!-- ===================== SCOPE OF WORK ===================== -->
+    <section class="section scope-of-work" id="scope">
         <div class="container">
             <div class="section-header fade-in">
+                <span class="section-badge">OSP</span>
+                <h2>Scope of Work</h2>
+                <p>Our comprehensive Outside Plant (OSP) work process from start to finish</p>
+            </div>
+            <div class="scope-grid fade-in">
+                <div class="scope-item">
+                    <div class="scope-number">1</div>
+                    <span>Preparation</span>
+                </div>
+                <div class="scope-item">
+                    <div class="scope-number">2</div>
+                    <span>Material Procurement</span>
+                </div>
+                <div class="scope-item">
+                    <div class="scope-number">3</div>
+                    <span>Permit Management</span>
+                </div>
+                <div class="scope-item">
+                    <div class="scope-number">4</div>
+                    <span>Subduct Excavation Channel Construction (FTTH, FTTX, Backbone &amp; Feeder)</span>
+                </div>
+                <div class="scope-item">
+                    <div class="scope-number">5</div>
+                    <span>Subduct Withdrawal</span>
+                </div>
+                <div class="scope-item">
+                    <div class="scope-number">6</div>
+                    <span>Handhole Construction</span>
+                </div>
+                <div class="scope-item">
+                    <div class="scope-number">7</div>
+                    <span>FO Cable Pulling &mdash; Aerial &amp; Underground</span>
+                </div>
+                <div class="scope-item">
+                    <div class="scope-number">8</div>
+                    <span>Splicing &amp; Termination</span>
+                </div>
+                <div class="scope-item">
+                    <div class="scope-number">9</div>
+                    <span>Repair &amp; Tidying</span>
+                </div>
+                <div class="scope-item">
+                    <div class="scope-number">10</div>
+                    <span>Documentation &amp; Acceptance</span>
+                </div>
+                <div class="scope-item">
+                    <div class="scope-number">11</div>
+                    <span>Handover (BAST)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== LOCATION WORKS ===================== -->
+    <section class="section locations" id="locations">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-badge">Coverage Area</span>
+                <h2>Location Works</h2>
+                <p>Our operational coverage across Indonesia</p>
+            </div>
+            <div class="location-grid fade-in">
+                <div class="location-card">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h4>Sumatera</h4>
+                    <p>Medan, Padang, Pekanbaru, Jambi, Bangka, Belitung, Palembang, Lampung</p>
+                </div>
+                <div class="location-card">
+                    <i class="fas fa-city"></i>
+                    <h4>Jabodetabek</h4>
+                    <p>Jakarta, Bogor, Depok, Tangerang, Bekasi</p>
+                </div>
+                <div class="location-card">
+                    <i class="fas fa-map-pin"></i>
+                    <h4>Jawa Barat</h4>
+                    <p>Bandung and surrounding areas</p>
+                </div>
+                <div class="location-card">
+                    <i class="fas fa-map-pin"></i>
+                    <h4>Jawa Tengah</h4>
+                    <p>Semarang and surrounding areas</p>
+                </div>
+                <div class="location-card">
+                    <i class="fas fa-map-pin"></i>
+                    <h4>Jawa Timur</h4>
+                    <p>Surabaya and surrounding areas</p>
+                </div>
+                <div class="location-card">
+                    <i class="fas fa-umbrella-beach"></i>
+                    <h4>Bali</h4>
+                    <p>Denpasar and surrounding areas</p>
+                </div>
+            </div>
+            <div class="location-note fade-in">
+                <i class="fas fa-bolt" style="color: var(--gold); margin-right: 8px;"></i>
+                We understand that swift project execution begins with the licensing process. With our extensive experience and strong relationships with licensing authorities, we guarantee that permits can be processed quickly (&plusmn; 2 weeks to 1 month), allowing work to commence promptly.
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== SUPPLIER ===================== -->
+    <section class="section supplier" id="supplier">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-badge">Our Partners</span>
+                <h2>Material Suppliers</h2>
+                <p>Trusted supplier partnerships ensuring premium quality materials</p>
+            </div>
+            <div class="supplier-grid fade-in">
+                <div class="supplier-card">
+                    <h4><i class="fas fa-network-wired"></i> Fiber Optic Cable</h4>
+                    <ul>
+                        <li><i class="fas fa-circle"></i> PT. Communication Cable System Indonesia</li>
+                        <li><i class="fas fa-circle"></i> PT. Furukawa Optical Solution Indonesia</li>
+                        <li><i class="fas fa-circle"></i> PT. Voksel Electric, Tbk</li>
+                        <li><i class="fas fa-circle"></i> PT. Jembo Cable</li>
+                        <li><i class="fas fa-circle"></i> PT. YOFC</li>
+                        <li><i class="fas fa-circle"></i> PT. ZTT</li>
+                    </ul>
+                </div>
+                <div class="supplier-card">
+                    <h4><i class="fas fa-pipe-section"></i> HDPE &amp; PVC Pipes</h4>
+                    <ul>
+                        <li><i class="fas fa-circle"></i> PT. Harapan Widyatama Pertiwi (Unilon)</li>
+                        <li><i class="fas fa-circle"></i> PT. Rusli Vinilon Sakti (Vinilon)</li>
+                    </ul>
+                </div>
+                <div class="supplier-card">
+                    <h4><i class="fas fa-puzzle-piece"></i> FO Accessories (Closure, OTB, ODP, Splitter)</h4>
+                    <ul>
+                        <li><i class="fas fa-circle"></i> PT. Buana Selaras Globalindo (NWC)</li>
+                        <li><i class="fas fa-circle"></i> PT. 3M Indonesia (3M)</li>
+                        <li><i class="fas fa-circle"></i> PT. Lentera Andalan Komunikasi (Sieges)</li>
+                        <li><i class="fas fa-circle"></i> PT. Advancednet Indonesia (Litech)</li>
+                        <li><i class="fas fa-circle"></i> PT. Putratel Andalan Sukses (PAZ)</li>
+                    </ul>
+                </div>
+                <div class="supplier-card">
+                    <h4><i class="fas fa-broadcast-tower"></i> Steel Pole</h4>
+                    <ul>
+                        <li><i class="fas fa-circle"></i> PT. Sanggar Jaya Abadi</li>
+                        <li><i class="fas fa-circle"></i> PT. Bumi Kaya Steel</li>
+                        <li><i class="fas fa-circle"></i> PT. United Steel Partners Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== CLIENTS / EXPERIENCES ===================== -->
+    <section class="section clients" id="clients">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-badge">Our Clients</span>
+                <h2>Company Experiences</h2>
+                <p>Trusted by leading telecommunications companies across Indonesia</p>
+            </div>
+            <div class="fade-in">
+                <table class="clients-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Customer</th>
+                            <th>Since</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>PT. LINKNET. TBK</td><td>2025</td></tr>
+                        <tr><td>2</td><td>PT. CFT</td><td>2014</td></tr>
+                        <tr><td>3</td><td>PT. DELAMETA</td><td>2018</td></tr>
+                        <tr><td>4</td><td>PT. NETCITI PESADA</td><td>2020</td></tr>
+                        <tr><td>5</td><td>PT. Integrasi Jaringan Ekosistem</td><td>2025</td></tr>
+                        <tr><td>6</td><td>PT. ATP</td><td>2019</td></tr>
+                        <tr><td>7</td><td>PT. RPA</td><td>2015</td></tr>
+                        <tr><td>8</td><td>PT. SKK</td><td>2020</td></tr>
+                        <tr><td>9</td><td>PT. Compalindo</td><td>2019</td></tr>
+                        <tr><td>10</td><td>PT. JALA LINTAS MEDIA</td><td>2024</td></tr>
+                        <tr><td>11</td><td>PT. TELEMEDIA KOMUNIKASI PRATAMA</td><td>2025</td></tr>
+                        <tr><td>12</td><td>PT. INDOLINK</td><td>2025</td></tr>
+                    </tbody>
+                </table>
+                <div class="clients-note">
+                    <i class="fas fa-check-circle" style="color: var(--gold); margin-right: 8px;"></i>
+                    Note: All projects we receive are executed directly without sub-contracting.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== PORTFOLIO ===================== -->
                 <span class="section-badge">Our Work</span>
                 <h2>Project Portfolio</h2>
                 <p>A showcase of projects we have successfully delivered</p>
@@ -784,7 +1078,9 @@ img { max-width: 100%; height: auto; }
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#services">Services</a></li>
-                        <li><a href="#organization">Structure</a></li>
+                        <li><a href="#scope">Scope of Work</a></li>
+                        <li><a href="#locations">Locations</a></li>
+                        <li><a href="#clients">Clients</a></li>
                         <li><a href="#portfolio">Portfolio</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
