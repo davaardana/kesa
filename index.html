@@ -4,8 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="PT. Kharisma Elsyadai Sukses Abadi - Leading provider of materials and services for fiber optic cable network construction since 2013.">
-    <meta name="keywords" content="fiber optic, fiber cable, FTTH, connection, termination, horizontal directional drilling, splicer, OTDR, Jakarta, Indonesia">
+    <meta name="keywords" content="fiber optic, fiber cable, FTTH, connection, termination, horizontal directional drilling, splicer, OTDR, Jakarta, Indonesia, kesa, kharisma elsyadai">
+    <meta name="author" content="PT. Kharisma Elsyadai Sukses Abadi">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://kesa.co.id/">
     <title>PT. Kharisma Elsyadai Sukses Abadi | Fiber Optic Solutions</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kesa.co.id/">
+    <meta property="og:title" content="PT. Kharisma Elsyadai Sukses Abadi | Fiber Optic Solutions">
+    <meta property="og:description" content="Leading provider of materials and services for fiber optic cable network construction since 2013. Connection, termination, FTTH, HDD, and more.">
+    <meta property="og:image" content="https://kesa.co.id/og-image.png">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:site_name" content="PT. Kharisma Elsyadai Sukses Abadi">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PT. Kharisma Elsyadai Sukses Abadi | Fiber Optic Solutions">
+    <meta name="twitter:description" content="Leading provider of materials and services for fiber optic cable network construction since 2013.">
+    <meta name="twitter:image" content="https://kesa.co.id/og-image.png">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f9a825'/%3E%3Ctext x='10' y='43' font-family='Montserrat,Arial,sans-serif' font-size='30' font-weight='900'%3E%3Ctspan fill='%230d1453'%3EK%3C/tspan%3E%3Ctspan fill='%23ffffff'%3ES%3C/tspan%3E%3C/text%3E%3C/svg%3E">
@@ -19,6 +37,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Inline CSS -->
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "PT. Kharisma Elsyadai Sukses Abadi",
+        "alternateName": "KESA",
+        "url": "https://kesa.co.id",
+        "logo": "https://kesa.co.id/og-image.png",
+        "description": "Leading provider of materials and services for fiber optic cable network construction since 2013.",
+        "foundingDate": "2013-09-18",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Jl. Ajun Inspektur Polisi Dua Karel Satsuit Tubun No. 88",
+            "addressLocality": "West Jakarta",
+            "addressRegion": "DKI Jakarta",
+            "addressCountry": "ID"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+6283808925282",
+            "contactType": "customer service",
+            "email": "info@kesa.co.id",
+            "availableLanguage": ["Indonesian", "English"]
+        },
+        "sameAs": [],
+        "areaServed": {
+            "@type": "Country",
+            "name": "Indonesia"
+        },
+        "serviceType": ["Fiber Optic Installation", "FTTH", "Connection & Termination", "Horizontal Directional Drilling", "Network Construction", "Material Supply"]
+    }
+    </script>
     <style>
 /* === VARIABLES === */
 :root {
@@ -1074,7 +1125,7 @@ img { max-width: 100%; height: auto; }
                         </div>
                         <div>
                             <h4>Email</h4>
-                            <p>Kharisma.elsadai@gmail.com</p>
+                            <p>info@kesa.co.id</p>
                         </div>
                     </div>
                 </div>
@@ -1116,10 +1167,9 @@ img { max-width: 100%; height: auto; }
                     <span class="logo-text"><span>K</span>S</span>
                     <p>PT. Kharisma Elsyadai Sukses Abadi is a company specialising in the provision of materials and services for fiber optic cable network construction, established since 2013.</p>
                     <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://wa.me/6283808925282" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="mailto:info@kesa.co.id" title="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="tel:+6283808925282" title="Phone"><i class="fas fa-phone-alt"></i></a>
+                        <a href="https://wa.me/6283808925282" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div>
@@ -1158,7 +1208,7 @@ img { max-width: 100%; height: auto; }
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>Kharisma.elsadai@gmail.com</span>
+                        <span>info@kesa.co.id</span>
                     </div>
                 </div>
             </div>
@@ -1278,6 +1328,13 @@ navItems.forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
     });
+});
+
+// Lazy load images - add loading="lazy" to dynamically created images
+document.querySelectorAll('img').forEach(img => {
+    if (!img.hasAttribute('loading')) {
+        img.setAttribute('loading', 'lazy');
+    }
 });
     </script>
 </body>
