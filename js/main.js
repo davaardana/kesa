@@ -1,163 +1,167 @@
-/* ============================================
-   PT. Kharisma Elsyadai Sukses Abadi
-   Main JavaScript
-   ============================================ */
+﻿// ============================================
+// PT. Kharisma Elsyadai Sukses Abadi
+// Main JavaScript File
+// ============================================
 
-// === NAVBAR SCROLL EFFECT ===
-const navbar = document.getElementById('navbar');
-
+// Navbar scroll effect
+const navbar = document.querySelector('.navbar');
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
 });
 
-// === MOBILE MENU TOGGLE ===
-function toggleMenu() {
-    const navLinks = document.getElementById('navLinks');
+// Mobile menu
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
-}
-
-// Close menu when clicking a link
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        const navLinks = document.getElementById('navLinks');
-        navLinks.classList.remove('active');
-    });
+    hamburger.classList.toggle('open');
 });
 
-// === ACTIVE NAV LINK ON SCROLL ===
+// Active nav link on scroll
 const sections = document.querySelectorAll('section[id]');
-const navLinksAll = document.querySelectorAll('.nav-links a');
-
+const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
 window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(section => {
         const sectionTop = section.offsetTop - 100;
-        if (window.scrollY >= sectionTop) {
-            current = section.getAttribute('id');
-        }
+        if (window.scrollY >= sectionTop) current = section.getAttribute('id');
     });
-
-    navLinksAll.forEach(link => {
+    navItems.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
-            link.classList.add('active');
-        }
+        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
     });
 });
 
-// === SCROLL TO TOP ===
-const scrollTopBtn = document.getElementById('scrollTop');
-
+// Scroll to top button
+const scrollTopBtn = document.querySelector('.scroll-top');
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-        scrollTopBtn.classList.add('visible');
-    } else {
-        scrollTopBtn.classList.remove('visible');
-    }
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
+});
+scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// === FADE IN ON SCROLL (Intersection Observer) ===
-const fadeElements = document.querySelectorAll('.fade-in');
-
-const fadeObserver = new IntersectionObserver((entries) => {
+// Fade-in animation with Intersection Observer
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            fadeObserver.unobserve(entry.target);
+            observer.unobserve(entry.target);
         }
     });
-}, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-});
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+fadeEls.forEach(el => observer.observe(el));
 
-fadeElements.forEach(el => fadeObserver.observe(el));
-
-// === COUNTER ANIMATION ===
-const counters = document.querySelectorAll('.count');
-let countersAnimated = false;
-
+// Counter animation
+function animateCounter(el) {
+    const target = parseInt(el.getAttribute('data-target'));
+    const suffix = el.getAttribute('data-suffix') || '';
+    const duration = 2000;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+            current = target;
+            clearInterval(timer);
+        }
+        el.textContent = Math.floor(current) + suffix;
+    }, 16);
+}
+const counters = document.querySelectorAll('.count[data-target]');
 const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting && !countersAnimated) {
-            countersAnimated = true;
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-target'));
-                const duration = 2000;
-                const step = target / (duration / 16);
-                let current = 0;
-
-                const updateCounter = () => {
-                    current += step;
-                    if (current < target) {
-                        counter.textContent = Math.ceil(current) + '+';
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.textContent = target + '+';
-                    }
-                };
-
-                updateCounter();
-            });
+        if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterObserver.unobserve(entry.target);
         }
     });
 }, { threshold: 0.5 });
+counters.forEach(c => counterObserver.observe(c));
 
-const counterSection = document.querySelector('.about-counters');
-if (counterSection) {
-    counterObserver.observe(counterSection);
-}
-
-// === CONTACT FORM HANDLER ===
-function handleSubmit(event) {
-    event.preventDefault();
-
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const message = document.getElementById('message').value;
-
-    // Create WhatsApp message
-    const waMessage = `Halo PT. Kharisma Elsyadai Sukses Abadi,%0A%0ANama: ${name}%0AEmail: ${email}%0ATelepon: ${phone}%0APesan: ${message}`;
-
-    // Open WhatsApp
-    window.open(`https://wa.me/6283808925282?text=${waMessage}`, '_blank');
-
-    // Reset form
-    document.getElementById('contactForm').reset();
-
-    // Show success message
-    alert('Pesan Anda akan dikirim via WhatsApp. Terima kasih!');
-}
-
-// === SMOOTH SCROLL FOR ANCHOR LINKS ===
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+// Contact form - send via Formspree (email) + WhatsApp
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const offsetTop = target.offsetTop - 70;
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
+        const btn = this.querySelector('.btn-submit');
+        const statusEl = this.querySelector('.form-status');
+        const name = this.querySelector('[name="name"]').value;
+        const email = this.querySelector('[name="email"]').value;
+        const phone = this.querySelector('[name="phone"]').value;
+        const message = this.querySelector('[name="message"]').value;
+        const formAction = this.getAttribute('action');
+
+        // Show loading state
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+        if (statusEl) { statusEl.className = 'form-status'; statusEl.textContent = ''; }
+
+        // If Formspree action is configured, send via email
+        if (formAction && formAction.includes('formspree.io')) {
+            try {
+                const response = await fetch(formAction, {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, phone, message })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    if (statusEl) {
+                        statusEl.className = 'form-status success';
+                        statusEl.textContent = 'Message sent successfully! We will contact you soon.';
+                    }
+                    this.reset();
+                } else {
+                    throw new Error(data.errors ? data.errors.map(e => e.message).join(', ') : 'Failed to send');
+                }
+            } catch (err) {
+                if (statusEl) {
+                    statusEl.className = 'form-status error';
+                    statusEl.textContent = 'Failed to send email. Redirecting to WhatsApp...';
+                }
+                setTimeout(() => sendWhatsApp(name, email, phone, message), 1500);
+            }
+        } else {
+            // No Formspree configured — fallback to WhatsApp
+            sendWhatsApp(name, email, phone, message);
         }
+
+        btn.textContent = 'Send Message';
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        btn.disabled = false;
+    });
+}
+
+function sendWhatsApp(name, email, phone, message) {
+    const waNumber = '6283808925282';
+    const waText = encodeURIComponent(`Hello, my name is ${name} (${email}, ${phone}).\n\n${message}`);
+    window.open(`https://wa.me/${waNumber}?text=${waText}`, '_blank');
+}
+
+// Close mobile menu when clicking a link
+navItems.forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('open');
     });
 });
 
-// === LOADING ANIMATION ===
-window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.5s ease';
-    setTimeout(() => {
-        document.body.style.opacity = '1';
-    }, 100);
+// Lazy load images
+document.querySelectorAll('img').forEach(img => {
+    if (!img.hasAttribute('loading')) {
+        img.setAttribute('loading', 'lazy');
+    }
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
 });
