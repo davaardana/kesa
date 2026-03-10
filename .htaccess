@@ -1,9 +1,11 @@
 # === PT. Kharisma Elsyadai Sukses Abadi ===
 # Apache Configuration for kesa.co.id
+# Enhanced Security Configuration
 
 # Enable Rewrite Engine
 RewriteEngine On
 
+# ========== HTTPS & WWW ENFORCEMENT ==========
 # Force HTTPS
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
@@ -12,6 +14,24 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # RewriteCond %{HTTP_HOST} ^kesa\.co\.id [NC]
 # RewriteRule ^(.*)$ https://www.kesa.co.id/$1 [L,R=301]
 
+# ========== BLOCK SENSITIVE FILES & DIRECTORIES ==========
+# Block access to .git, .gitignore, README, config files
+RewriteRule ^\.git - [F]
+RewriteRule ^\.github - [F]
+RewriteRule ^\.gitignore - [F]
+RewriteRule ^\.env - [F]
+RewriteRule ^\.htaccess - [F]
+RewriteRule ^composer\.json - [F]
+RewriteRule ^composer\.lock - [F]
+RewriteRule ^package\.json - [F]
+RewriteRule ^package-lock\.json - [F]
+RewriteRule ^README - [F]
+RewriteRule ^LICENSE - [F]
+
+# Block access to node_modules and vendor directories
+RewriteRule ^(node_modules|vendor|\.well-known/acme-challenge) - [L]
+
+# ========== URL REWRITING ==========
 # Remove .html extension
 RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
 RewriteRule ^ /%1 [NC,L,R=301]
@@ -19,14 +39,34 @@ RewriteRule ^ /%1 [NC,L,R=301]
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^ %{REQUEST_URI}.html [NC,L]
 
-# Security Headers
+# ========== SECURITY HEADERS ==========
 <IfModule mod_headers.c>
+    # Prevent MIME-type sniffing
     Header set X-Content-Type-Options "nosniff"
+    
+    # Clickjacking protection
     Header set X-Frame-Options "SAMEORIGIN"
+    
+    # XSS Protection
     Header set X-XSS-Protection "1; mode=block"
+    
+    # Referrer Policy
     Header set Referrer-Policy "strict-origin-when-cross-origin"
-    Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+    
+    # Permissions Policy (Feature Policy)
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+    
+    # HSTS - Force HTTPS for 1 year
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    
+    # Disable client-side caching for sensitive content
+    Header set Cache-Control "public, max-age=3600"
+    
+    # Remove X-Powered-By to hide server technology
+    Header always unset X-Powered-By
+    Header unset X-Powered-By
 </IfModule>
+
 
 # Enable Gzip Compression
 <IfModule mod_deflate.c>
@@ -48,8 +88,43 @@ RewriteRule ^ %{REQUEST_URI}.html [NC,L]
     ExpiresByType font/woff2 "access plus 1 year"
 </IfModule>
 
+# ========== PROTECTION AGAINST COMMON ATTACKS ==========
+# Block access to PHP files (if not used)
+<FilesMatch "\.php$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Block executable file types
+<FilesMatch "\.(exe|com|bat|cmd|sh|powershell|phtml|php3|php4|php5|php6|php7|phps|php-s|pht|phar|pgif|shtml|htaccess|passwd|shadow|conf|htpasswd|ini|log|txt|cfg|sql|mdb|wp-config|private|secret)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Prevent access to important directories
+<FilesMatch "(^#.*#|\.(dist|mdp|mysql|pot|sh|sql|sqlite|swp|sync|swo|example|cfg|conf|in|log|sql|sqlite3)$)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
 # Block directory listing
 Options -Indexes
 
-# Custom Error Pages
+# ========== CUSTOM ERROR PAGES ==========
 ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html

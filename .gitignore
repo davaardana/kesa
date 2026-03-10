@@ -1,4 +1,34 @@
+# IDE & Editor
 .vscode/
+.idea/
+*.swp
+*.swo
+
+# Deployment & Credentials
 deploy.ps1
+.env
+.env.local
+.env.*.local
+
+# Documentation
 PANDUAN-UPLOAD.md
+
+# OS Files
 .DS_Store
+Thumbs.db
+desktop.ini
+
+# Node & Package managers
+node_modules/
+vendor/
+package-lock.json
+composer.lock
+
+# Logs
+*.log
+logs/
+
+# Backups & Temporary files
+*.bak
+*.tmp
+*~
