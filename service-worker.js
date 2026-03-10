@@ -1,5 +1,5 @@
 // Service Worker para PT. Kharisma Elsyadai Sukses Abadi
-const CACHE_NAME = 'kesa-v1';
+const CACHE_NAME = 'kesa-v2';  // Increment version to force clear cache
 const STATIC_ASSETS = [
   '/',
   '/index.html',
