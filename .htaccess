@@ -50,8 +50,8 @@ RewriteRule ^ %{REQUEST_URI}.html [NC,L]
     # XSS Protection
     Header set X-XSS-Protection "1; mode=block"
     
-    # Referrer Policy
-    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    # Referrer Policy (more permissive to avoid resource loading issues)
+    Header set Referrer-Policy "no-referrer-when-downgrade"
     
     # Permissions Policy (Feature Policy)
     Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
@@ -112,8 +112,8 @@ RewriteRule ^ %{REQUEST_URI}.html [NC,L]
     </IfModule>
 </FilesMatch>
 
-# Block executable file types
-<FilesMatch "\.(exe|com|bat|cmd|sh|powershell|phtml|php3|php4|php5|php6|php7|phps|php-s|pht|phar|pgif|shtml|htaccess|passwd|shadow|conf|htpasswd|ini|log|txt|cfg|sql|mdb|wp-config|private|secret)$">
+# Block ONLY truly dangerous executable file types
+<FilesMatch "\.(exe|com|bat|cmd|sh|powershell|phtml|php3|php4|php5|php6|php7|phps|php-s|pht|phar)$">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
@@ -123,8 +123,8 @@ RewriteRule ^ %{REQUEST_URI}.html [NC,L]
     </IfModule>
 </FilesMatch>
 
-# Prevent access to important directories
-<FilesMatch "(^#.*#|\.(dist|mdp|mysql|pot|sh|sql|sqlite|swp|sync|swo|example|cfg|conf|in|log|sql|sqlite3)$)">
+# Prevent access to important system files (not config files we use)
+<FilesMatch "(^#.*#|\.(dist|mdp|mysql|pot|sqlite|swp|sync|swo|example)$)">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
@@ -133,6 +133,25 @@ RewriteRule ^ %{REQUEST_URI}.html [NC,L]
         Deny from all
     </IfModule>
 </FilesMatch>
+
+# ALLOW important files
+<FilesMatch "\.(json|xml|txt|html|css|js)$">
+    <IfModule mod_authz_core.c>
+        Require all granted
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Allow from all
+    </IfModule>
+</FilesMatch>
+
+# ========== SET PROPER CONTENT TYPES ==========
+AddType application/json .json
+AddType application/xml .xml
+AddType text/plain .txt
+AddType text/html .html
+AddType text/css .css
+AddType application/javascript .js
 
 # Block directory listing
 Options -Indexes
