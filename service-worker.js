@@ -15,14 +15,23 @@ const STATIC_ASSETS = [
   '/manifest.json'
 ];
 
-// Install event - cache static assets
+// Install event - cache static assets (graceful failure)
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(STATIC_ASSETS).catch(err => {
-        console.log('Cache addAll error:', err);
-        return cache.addAll(STATIC_ASSETS.filter(url => url !== '/' && !url.includes('google')));
-      });
+      // Try to cache all assets, but don't fail if some are unavailable
+      return Promise.all(
+        STATIC_ASSETS.map(url => {
+          return cache.add(url).catch(err => {
+            console.log('Failed to cache ' + url, err);
+            // Continue without failing entire install
+            return Promise.resolve();
+          });
+        })
+      );
+    }).catch(err => {
+      console.log('Cache open failed:', err);
+      return Promise.resolve();
     }).then(() => self.skipWaiting())
   );
 });
