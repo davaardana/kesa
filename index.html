@@ -30,15 +30,22 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f9a825'/%3E%3Ctext x='10' y='43' font-family='Montserrat,Arial,sans-serif' font-size='30' font-weight='900'%3E%3Ctspan fill='%230d1453'%3EK%3C/tspan%3E%3Ctspan fill='%23ffffff'%3ES%3C/tspan%3E%3C/text%3E%3C/svg%3E">
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts (Optimized - reduced weights) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Font Awesome with SRI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3H5NxgwRDtWldIlMVkaqlL/v/BBWfS3CwC9+pzfDBb9+4RB/NxNvqKZlZVrKQBRV8Rjlxh0qXjEQ==" crossorigin="anonymous">
 
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a237e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
@@ -70,6 +77,15 @@
             "name": "Indonesia"
         },
         "serviceType": ["Fiber Optic Installation", "FTTH", "Connection & Termination", "Horizontal Directional Drilling", "Network Construction", "Material Supply"]
+    }
+    </script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js').catch(err => console.log('SW registration failed'));
+        });
     }
     </script>
 </head>
